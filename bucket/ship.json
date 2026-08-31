@@ -1,16 +1,16 @@
 {
-    "version": "2.8.0",
+    "version": "2.8.3",
     "description": "Docker image build, push and remote deploy CLI",
     "homepage": "https://github.com/heyoungai/ship",
     "license": "Apache-2.0",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/heyoungai/ship/releases/download/v2.8.0/ship-windows-amd64.exe#/ship.exe",
-            "hash": "a5991a76fc79c0c90bbcaaf300c370ef7a8ca33369ee934ab7c033114d406db2"
+            "url": "https://github.com/heyoungai/ship/releases/download/v2.8.3/ship-windows-amd64.exe#/ship.exe",
+            "hash": "83b087fbcbdb6f51a52545118aa6bab26019cc4955ffc236c2fd825f4751a610"
         },
         "arm64": {
-            "url": "https://github.com/heyoungai/ship/releases/download/v2.8.0/ship-windows-arm64.exe#/ship-arm64.exe",
-            "hash": "f1a596b97c74fc845b3a6b6280f11d1aa96a60354f448392ef4915a386b9bf74"
+            "url": "https://github.com/heyoungai/ship/releases/download/v2.8.3/ship-windows-arm64.exe#/ship-arm64.exe",
+            "hash": "ec114de8e575bd42bc2206478c17e94cf012e7324b0c3f3ac6a26699c2b3e9b0"
         }
     },
     "bin": "ship.exe",
