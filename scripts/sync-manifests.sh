@@ -146,10 +146,108 @@ print(f"code-porter -> v{version}")
 PY
 }
 
+sync_aiquokka() {
+  local repo="star-plan/aiquokka"
+  local tag version dir sums h64 h_arm asset64 asset_arm
+
+  # Latest release only (skip tags without a Release).
+  if ! tag="$(gh release view -R "$repo" --json tagName -q .tagName 2>/dev/null)"; then
+    echo "aiquokka: no GitHub Release yet; skip"
+    return 0
+  fi
+
+  version="${tag#v}"
+  dir="$TMP/aiquokka"
+  mkdir -p "$dir"
+
+  asset64="aiquokka-windows-amd64.exe"
+  asset_arm="aiquokka-windows-arm64.exe"
+
+  if ! gh release download "$tag" \
+      -R "$repo" \
+      -D "$dir" \
+      -p "SHA256SUMS" \
+      -p "$asset64" \
+      -p "$asset_arm" 2>/dev/null; then
+    echo "aiquokka: release $tag missing Windows binaries or SHA256SUMS; skip"
+    return 0
+  fi
+
+  sums="$dir/SHA256SUMS"
+
+  if [[ ! -f "$sums" ]]; then
+    (cd "$dir" && sha256sum "$asset64" "$asset_arm" > SHA256SUMS)
+    sums="$dir/SHA256SUMS"
+  fi
+
+  h64="$(hash_for "$asset64" "$sums")"
+  h_arm="$(hash_for "$asset_arm" "$sums")"
+
+  if [[ -z "$h64" && -f "$dir/$asset64" ]]; then
+    h64="$(sha256sum "$dir/$asset64" | awk '{print $1}')"
+  fi
+
+  if [[ -z "$h_arm" && -f "$dir/$asset_arm" ]]; then
+    h_arm="$(sha256sum "$dir/$asset_arm" | awk '{print $1}')"
+  fi
+
+  if [[ -z "$h64" || -z "$h_arm" ]]; then
+    echo "aiquokka: could not resolve Windows hashes; skip" >&2
+    return 0
+  fi
+
+  python3 - "$BUCKET/aiquokka.json" "$version" "$h64" "$h_arm" <<'PY'
+import json, sys
+
+path, version, h64, h_arm = sys.argv[1:5]
+
+data = {
+    "version": version,
+    "description": "Unified subscription quota monitor for Claude, Codex, Cursor, Grok, and more",
+    "homepage": "https://github.com/star-plan/aiquokka",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": f"https://github.com/star-plan/aiquokka/releases/download/v{version}/aiquokka-windows-amd64.exe#/aiquokka.exe",
+            "hash": h64,
+        },
+        "arm64": {
+            "url": f"https://github.com/star-plan/aiquokka/releases/download/v{version}/aiquokka-windows-arm64.exe#/aiquokka.exe",
+            "hash": h_arm,
+        },
+    },
+    "bin": "aiquokka.exe",
+    "checkver": {
+        "github": "https://github.com/star-plan/aiquokka"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/star-plan/aiquokka/releases/download/v$version/aiquokka-windows-amd64.exe#/aiquokka.exe"
+            },
+            "arm64": {
+                "url": "https://github.com/star-plan/aiquokka/releases/download/v$version/aiquokka-windows-arm64.exe#/aiquokka.exe"
+            },
+        },
+        "hash": {
+            "url": "https://github.com/star-plan/aiquokka/releases/download/v$version/SHA256SUMS"
+        },
+    },
+}
+
+with open(path, "w", encoding="utf-8") as fh:
+    json.dump(data, fh, indent=4)
+    fh.write("\n")
+
+print(f"aiquokka -> v{version}")
+PY
+}
+
 main() {
   mkdir -p "$BUCKET"
   sync_ship
   sync_code_porter
+  sync_aiquokka
   echo "sync complete"
 }
 
