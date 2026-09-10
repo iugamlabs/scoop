@@ -1,16 +1,16 @@
 {
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Unified subscription quota monitor for Claude, Codex, Cursor, Grok, and more",
     "homepage": "https://github.com/star-plan/aiquokka",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/star-plan/aiquokka/releases/download/v0.1.1/aiquokka-windows-amd64.exe#/aiquokka.exe",
-            "hash": "f546566760178350a47153e1e6ac0513b87d1ddf00bd7c150ed0ba0a611c3ae4"
+            "url": "https://github.com/star-plan/aiquokka/releases/download/v0.1.2/aiquokka-windows-amd64.exe#/aiquokka.exe",
+            "hash": "4dd6a3c4d75c3d75285ca978659a35e0e1cac62e0ffad3ab7d4ba39aa53344d0"
         },
         "arm64": {
-            "url": "https://github.com/star-plan/aiquokka/releases/download/v0.1.1/aiquokka-windows-arm64.exe#/aiquokka.exe",
-            "hash": "4277ac3c985a9765448cafcb6d10949a39da909590064a689f8c8104caa0f982"
+            "url": "https://github.com/star-plan/aiquokka/releases/download/v0.1.2/aiquokka-windows-arm64.exe#/aiquokka.exe",
+            "hash": "f79ee7df0aa7f9afddcc294359893b94ef5a6c3de57b770e95d50629081f1da4"
         }
     },
     "bin": "aiquokka.exe",
