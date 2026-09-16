@@ -1,0 +1,39 @@
+{
+    "version": "2.3.4",
+    "description": "StarBlog Publisher desktop application",
+    "homepage": "https://github.com/star-blog/starblog-publisher",
+    "license": "MIT",
+    "notes": "Self-contained (non-AOT)",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/star-blog/starblog-publisher/releases/download/v2.3.4/StarBlogPublisher-windows-self-contained-2.3.4.zip",
+            "hash": "f2cd2e85b041d95423254c31bb9b26a76506d2c25fda7920e1167a1ea7bc7eb5"
+        }
+    },
+    "bin": [
+        [
+            "StarBlogPublisher.exe",
+            "starblog-publisher-self-contained"
+        ]
+    ],
+    "shortcuts": [
+        [
+            "StarBlogPublisher.exe",
+            "StarBlog Publisher (Self-contained (non-AOT))"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/star-blog/starblog-publisher"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/star-blog/starblog-publisher/releases/download/v$version/StarBlogPublisher-windows-self-contained-$version.zip"
+            }
+        },
+        "hash": {
+            "url": "https://github.com/star-blog/starblog-publisher/releases/download/v$version/SHA256SUMS",
+            "regex": "$sha256\\s+\\*?StarBlogPublisher-windows-self-contained-$version\\.zip"
+        }
+    }
+}
