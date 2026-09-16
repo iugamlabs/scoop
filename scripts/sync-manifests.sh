@@ -243,11 +243,95 @@ print(f"aiquokka -> v{version}")
 PY
 }
 
+sync_starblog_publisher() {
+  local repo="star-blog/starblog-publisher"
+  local tag version dir sums
+  local h_aot h_fd h_sc
+  local a_aot a_fd a_sc
+
+  if ! tag="$(gh release view -R "$repo" --json tagName -q .tagName 2>/dev/null)"; then
+    echo "starblog-publisher: no GitHub Release yet; skip"
+    return 0
+  fi
+
+  version="${tag#v}"
+  dir="$TMP/starblog-publisher"
+  mkdir -p "$dir"
+  if ! gh release download "$tag" -R "$repo" -D "$dir" -p "SHA256SUMS" 2>/dev/null; then
+    echo "starblog-publisher: release $tag has no SHA256SUMS yet; skip"
+    return 0
+  fi
+
+  sums="$dir/SHA256SUMS"
+  a_aot="StarBlogPublisher-windows-aot-${version}.zip"
+  a_fd="StarBlogPublisher-windows-framework-dependent-${version}.zip"
+  a_sc="StarBlogPublisher-windows-self-contained-${version}.zip"
+  h_aot="$(hash_for "$a_aot" "$sums")"
+  h_fd="$(hash_for "$a_fd" "$sums")"
+  h_sc="$(hash_for "$a_sc" "$sums")"
+
+  if [[ -z "$h_aot" || -z "$h_fd" || -z "$h_sc" ]]; then
+    echo "starblog-publisher: incomplete Windows release assets for $tag; skip" >&2
+    return 0
+  fi
+
+  python3 - "$BUCKET" "$version" "$h_aot" "$h_fd" "$h_sc" <<'PY'
+import json, sys
+
+bucket, version, h_aot, h_fd, h_sc = sys.argv[1:6]
+repo = "https://github.com/star-blog/starblog-publisher"
+base = f"{repo}/releases/download/v{version}"
+variants = [
+    ("starblog-publisher", "aot", h_aot, "Native AOT (default)", "starblog-publisher"),
+    ("starblog-publisher-framework-dependent", "framework-dependent", h_fd,
+     "Framework-dependent; requires .NET 10 Runtime", "starblog-publisher-framework-dependent"),
+    ("starblog-publisher-self-contained", "self-contained", h_sc,
+     "Self-contained (non-AOT)", "starblog-publisher-self-contained"),
+]
+
+for package, mode, checksum, note, command in variants:
+    asset = f"StarBlogPublisher-windows-{mode}-{version}.zip"
+    asset_pattern = f"StarBlogPublisher-windows-{mode}-$version.zip"
+    data = {
+        "version": version,
+        "description": "StarBlog Publisher desktop application",
+        "homepage": repo,
+        "license": "MIT",
+        "notes": note,
+        "architecture": {
+            "64bit": {
+                "url": f"{base}/{asset}",
+                "hash": checksum,
+            }
+        },
+        "bin": [["StarBlogPublisher.exe", command]],
+        "shortcuts": [["StarBlogPublisher.exe", f"StarBlog Publisher ({note})"]],
+        "checkver": {"github": repo},
+        "autoupdate": {
+            "architecture": {
+                "64bit": {
+                    "url": f"{repo}/releases/download/v$version/{asset_pattern}"
+                }
+            },
+            "hash": {
+                "url": f"{repo}/releases/download/v$version/SHA256SUMS",
+                "regex": f"$sha256\\s+\\*?StarBlogPublisher-windows-{mode}-$version\\.zip",
+            },
+        },
+    }
+    with open(f"{bucket}/{package}.json", "w", encoding="utf-8") as fh:
+        json.dump(data, fh, indent=4)
+        fh.write("\n")
+    print(f"{package} -> v{version}")
+PY
+}
+
 main() {
   mkdir -p "$BUCKET"
   sync_ship
   sync_code_porter
   sync_aiquokka
+  sync_starblog_publisher
   echo "sync complete"
 }
 

@@ -1,13 +1,14 @@
-# star-plan Scoop bucket
+# iugamlabs Scoop bucket
 
-Scoop bucket for [star-plan](https://github.com/star-plan) (and related) CLI tools.
+Scoop bucket for iugamlabs and related tools.
 
 ## Install
 
 ```powershell
-scoop bucket add star-plan https://github.com/star-plan/scoop
+scoop bucket add iugamlabs https://github.com/iugamlabs/scoop
 scoop install ship
 scoop install code-porter
+scoop install starblog-publisher
 ```
 
 Update apps:
@@ -23,6 +24,9 @@ scoop update code-porter
 |-----|--------|--------|
 | [ship](bucket/ship.json) | [heyoungai/ship](https://github.com/heyoungai/ship) | Docker / binary release CLI |
 | [code-porter](bucket/code-porter.json) | [star-plan/code-porter](https://github.com/star-plan/code-porter) | Local code archive import/export; requires Git |
+| `starblog-publisher` | [star-blog/starblog-publisher](https://github.com/star-blog/starblog-publisher) | Desktop GUI; Native AOT (default) |
+| `starblog-publisher-framework-dependent` | [star-blog/starblog-publisher](https://github.com/star-blog/starblog-publisher) | Desktop GUI; requires .NET 10 Runtime |
+| `starblog-publisher-self-contained` | [star-blog/starblog-publisher](https://github.com/star-blog/starblog-publisher) | Desktop GUI; self-contained, non-AOT |
 
 ## How versions stay current
 
