@@ -1,13 +1,13 @@
 {
-    "version": "2.3.4",
+    "version": "3.0.0-beta.1",
     "description": "StarBlog Publisher desktop application",
     "homepage": "https://github.com/star-blog/starblog-publisher",
     "license": "MIT",
     "notes": "Framework-dependent; requires .NET 10 Runtime",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/star-blog/starblog-publisher/releases/download/v2.3.4/StarBlogPublisher-windows-framework-dependent-2.3.4.zip",
-            "hash": "2f9598d229abbd6753ad57450a945a00a9b89d7954a4806ecfa9677ce14790f5"
+            "url": "https://github.com/star-blog/starblog-publisher/releases/download/v3.0.0-beta.1/StarBlogPublisher-windows-framework-dependent-3.0.0-beta.1.zip",
+            "hash": "9ee8d5837acd499c5aac56659f1ae7ff2d60afe4a4702a10b30b02bed2c1a84c"
         }
     },
     "bin": [
