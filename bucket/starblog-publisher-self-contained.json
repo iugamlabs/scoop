@@ -1,13 +1,13 @@
 {
-    "version": "3.0.0-beta.1",
+    "version": "3.0.0-beta.2",
     "description": "StarBlog Publisher desktop application",
     "homepage": "https://github.com/star-blog/starblog-publisher",
     "license": "MIT",
     "notes": "Self-contained (non-AOT)",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/star-blog/starblog-publisher/releases/download/v3.0.0-beta.1/StarBlogPublisher-windows-self-contained-3.0.0-beta.1.zip",
-            "hash": "a0a416cb89a1e78fdb0d9fab3e310dd6b6f7ba1e8f6bdd585651c0e866225764"
+            "url": "https://github.com/star-blog/starblog-publisher/releases/download/v3.0.0-beta.2/StarBlogPublisher-windows-self-contained-3.0.0-beta.2.zip",
+            "hash": "5a92302e4465d25cc158810f650d4aa7faa4fb356a0514aa620616f94e5ff380"
         }
     },
     "bin": [
