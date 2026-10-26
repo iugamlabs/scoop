@@ -1,27 +1,27 @@
 {
     "version": "0.6.0",
     "description": "Local code archive importer/exporter (git bundle + zip)",
-    "homepage": "https://github.com/star-plan/code-porter",
+    "homepage": "https://github.com/iugamlabs/code-porter",
     "license": "Apache-2.0",
     "depends": "git",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/star-plan/code-porter/releases/download/v0.6.0/code-porter-windows-amd64.exe#/code-porter.exe",
+            "url": "https://github.com/iugamlabs/code-porter/releases/download/v0.6.0/code-porter-windows-amd64.exe#/code-porter.exe",
             "hash": "f18bf119e4bc4f4d3dd8b85282d6dec6281eeb3c44294cc20557a945648ef028"
         }
     },
     "bin": "code-porter.exe",
     "checkver": {
-        "github": "https://github.com/star-plan/code-porter"
+        "github": "https://github.com/iugamlabs/code-porter"
     },
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/star-plan/code-porter/releases/download/v$version/code-porter-windows-amd64.exe#/code-porter.exe"
+                "url": "https://github.com/iugamlabs/code-porter/releases/download/v$version/code-porter-windows-amd64.exe#/code-porter.exe"
             }
         },
         "hash": {
-            "url": "https://github.com/star-plan/code-porter/releases/download/v$version/SHA256SUMS"
+            "url": "https://github.com/iugamlabs/code-porter/releases/download/v$version/SHA256SUMS"
         }
     }
 }

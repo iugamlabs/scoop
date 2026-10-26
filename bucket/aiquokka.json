@@ -1,33 +1,33 @@
 {
     "version": "0.3.1",
     "description": "Unified subscription quota monitor for Claude, Codex, Cursor, Grok, and more",
-    "homepage": "https://github.com/star-plan/aiquokka",
+    "homepage": "https://github.com/iugamlabs/aiquokka",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/star-plan/aiquokka/releases/download/v0.3.1/aiquokka-windows-amd64.exe#/aiquokka.exe",
+            "url": "https://github.com/iugamlabs/aiquokka/releases/download/v0.3.1/aiquokka-windows-amd64.exe#/aiquokka.exe",
             "hash": "6be8c924e8a74f77ad9a9cd6d97690648d6e6d1c532b2fec5d5489c8b52179a3"
         },
         "arm64": {
-            "url": "https://github.com/star-plan/aiquokka/releases/download/v0.3.1/aiquokka-windows-arm64.exe#/aiquokka.exe",
+            "url": "https://github.com/iugamlabs/aiquokka/releases/download/v0.3.1/aiquokka-windows-arm64.exe#/aiquokka.exe",
             "hash": "d1a122a45e17b2afc0481474e6ada6d3fb04f07acee5111e08fa3bbf0817173f"
         }
     },
     "bin": "aiquokka.exe",
     "checkver": {
-        "github": "https://github.com/star-plan/aiquokka"
+        "github": "https://github.com/iugamlabs/aiquokka"
     },
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/star-plan/aiquokka/releases/download/v$version/aiquokka-windows-amd64.exe#/aiquokka.exe"
+                "url": "https://github.com/iugamlabs/aiquokka/releases/download/v$version/aiquokka-windows-amd64.exe#/aiquokka.exe"
             },
             "arm64": {
-                "url": "https://github.com/star-plan/aiquokka/releases/download/v$version/aiquokka-windows-arm64.exe#/aiquokka.exe"
+                "url": "https://github.com/iugamlabs/aiquokka/releases/download/v$version/aiquokka-windows-arm64.exe#/aiquokka.exe"
             }
         },
         "hash": {
-            "url": "https://github.com/star-plan/aiquokka/releases/download/v$version/SHA256SUMS"
+            "url": "https://github.com/iugamlabs/aiquokka/releases/download/v$version/SHA256SUMS"
         }
     }
 }
