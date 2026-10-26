@@ -19,7 +19,7 @@ hash_for() {
 }
 
 sync_ship() {
-  local repo="heyoungai/ship"
+  local repo="iugamlabs/ship"
   local tag version dir sums h64 h_arm
   tag="$(gh release view -R "$repo" --json tagName -q .tagName)"
   version="${tag#v}"
@@ -46,31 +46,31 @@ path, version, h64, h_arm = sys.argv[1:5]
 data = {
     "version": version,
     "description": "Docker image build, push and remote deploy CLI",
-    "homepage": "https://github.com/heyoungai/ship",
+    "homepage": "https://github.com/iugamlabs/ship",
     "license": "Apache-2.0",
     "architecture": {
         "64bit": {
-            "url": f"https://github.com/heyoungai/ship/releases/download/v{version}/ship-windows-amd64.exe#/ship.exe",
+            "url": f"https://github.com/iugamlabs/ship/releases/download/v{version}/ship-windows-amd64.exe#/ship.exe",
             "hash": h64,
         },
         "arm64": {
-            "url": f"https://github.com/heyoungai/ship/releases/download/v{version}/ship-windows-arm64.exe#/ship-arm64.exe",
+            "url": f"https://github.com/iugamlabs/ship/releases/download/v{version}/ship-windows-arm64.exe#/ship-arm64.exe",
             "hash": h_arm,
         },
     },
     "bin": "ship.exe",
-    "checkver": {"github": "https://github.com/heyoungai/ship"},
+    "checkver": {"github": "https://github.com/iugamlabs/ship"},
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/heyoungai/ship/releases/download/v$version/ship-windows-amd64.exe#/ship.exe"
+                "url": "https://github.com/iugamlabs/ship/releases/download/v$version/ship-windows-amd64.exe#/ship.exe"
             },
             "arm64": {
-                "url": "https://github.com/heyoungai/ship/releases/download/v$version/ship-windows-arm64.exe#/ship-arm64.exe"
+                "url": "https://github.com/iugamlabs/ship/releases/download/v$version/ship-windows-arm64.exe#/ship-arm64.exe"
             },
         },
         "hash": {
-            "url": "https://github.com/heyoungai/ship/releases/download/v$version/checksums.txt"
+            "url": "https://github.com/iugamlabs/ship/releases/download/v$version/checksums.txt"
         },
     },
 }
@@ -82,7 +82,7 @@ PY
 }
 
 sync_code_porter() {
-  local repo="star-plan/code-porter"
+  local repo="iugamlabs/code-porter"
   local tag version dir sums h64 asset
   # Latest release only (skip tags without a Release).
   if ! tag="$(gh release view -R "$repo" --json tagName -q .tagName 2>/dev/null)"; then
@@ -117,25 +117,25 @@ path, version, h64 = sys.argv[1:4]
 data = {
     "version": version,
     "description": "Local code archive importer/exporter (git bundle + zip)",
-    "homepage": "https://github.com/star-plan/code-porter",
+    "homepage": "https://github.com/iugamlabs/code-porter",
     "license": "Apache-2.0",
     "depends": "git",
     "architecture": {
         "64bit": {
-            "url": f"https://github.com/star-plan/code-porter/releases/download/v{version}/code-porter-windows-amd64.exe#/code-porter.exe",
+            "url": f"https://github.com/iugamlabs/code-porter/releases/download/v{version}/code-porter-windows-amd64.exe#/code-porter.exe",
             "hash": h64,
         }
     },
     "bin": "code-porter.exe",
-    "checkver": {"github": "https://github.com/star-plan/code-porter"},
+    "checkver": {"github": "https://github.com/iugamlabs/code-porter"},
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/star-plan/code-porter/releases/download/v$version/code-porter-windows-amd64.exe#/code-porter.exe"
+                "url": "https://github.com/iugamlabs/code-porter/releases/download/v$version/code-porter-windows-amd64.exe#/code-porter.exe"
             }
         },
         "hash": {
-            "url": "https://github.com/star-plan/code-porter/releases/download/v$version/SHA256SUMS"
+            "url": "https://github.com/iugamlabs/code-porter/releases/download/v$version/SHA256SUMS"
         },
     },
 }
@@ -147,7 +147,7 @@ PY
 }
 
 sync_aiquokka() {
-  local repo="star-plan/aiquokka"
+  local repo="iugamlabs/aiquokka"
   local tag version dir sums h64 h_arm asset64 asset_arm
 
   # Latest release only (skip tags without a Release).
@@ -204,33 +204,33 @@ path, version, h64, h_arm = sys.argv[1:5]
 data = {
     "version": version,
     "description": "Unified subscription quota monitor for Claude, Codex, Cursor, Grok, and more",
-    "homepage": "https://github.com/star-plan/aiquokka",
+    "homepage": "https://github.com/iugamlabs/aiquokka",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": f"https://github.com/star-plan/aiquokka/releases/download/v{version}/aiquokka-windows-amd64.exe#/aiquokka.exe",
+            "url": f"https://github.com/iugamlabs/aiquokka/releases/download/v{version}/aiquokka-windows-amd64.exe#/aiquokka.exe",
             "hash": h64,
         },
         "arm64": {
-            "url": f"https://github.com/star-plan/aiquokka/releases/download/v{version}/aiquokka-windows-arm64.exe#/aiquokka.exe",
+            "url": f"https://github.com/iugamlabs/aiquokka/releases/download/v{version}/aiquokka-windows-arm64.exe#/aiquokka.exe",
             "hash": h_arm,
         },
     },
     "bin": "aiquokka.exe",
     "checkver": {
-        "github": "https://github.com/star-plan/aiquokka"
+        "github": "https://github.com/iugamlabs/aiquokka"
     },
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/star-plan/aiquokka/releases/download/v$version/aiquokka-windows-amd64.exe#/aiquokka.exe"
+                "url": "https://github.com/iugamlabs/aiquokka/releases/download/v$version/aiquokka-windows-amd64.exe#/aiquokka.exe"
             },
             "arm64": {
-                "url": "https://github.com/star-plan/aiquokka/releases/download/v$version/aiquokka-windows-arm64.exe#/aiquokka.exe"
+                "url": "https://github.com/iugamlabs/aiquokka/releases/download/v$version/aiquokka-windows-arm64.exe#/aiquokka.exe"
             },
         },
         "hash": {
-            "url": "https://github.com/star-plan/aiquokka/releases/download/v$version/SHA256SUMS"
+            "url": "https://github.com/iugamlabs/aiquokka/releases/download/v$version/SHA256SUMS"
         },
     },
 }
