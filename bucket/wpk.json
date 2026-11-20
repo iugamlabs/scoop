@@ -1,0 +1,25 @@
+{
+    "version": "1.1.1",
+    "description": "Windows CLI to find, locate, and upgrade installed apps",
+    "homepage": "https://github.com/iugamlabs/wpk",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/iugamlabs/wpk/releases/download/v1.1.1/wpk-1.1.1-win-x64-aot.zip",
+            "hash": "555d1277449b0420da7f37ef7b5558e7b14035a9b2d2ee345cbaa33e05f75272"
+        }
+    },
+    "bin": "wpk.exe",
+    "checkver": {
+        "github": "https://github.com/iugamlabs/wpk"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/iugamlabs/wpk/releases/download/v$version/wpk-$version-win-x64-aot.zip"
+            }
+        },
+        "hash": {
+            "url": "https://github.com/iugamlabs/wpk/releases/download/v$version/SHA256SUMS.txt"
+        }
+    }
+}
