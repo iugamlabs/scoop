@@ -326,12 +326,70 @@ for package, mode, checksum, note, command in variants:
 PY
 }
 
+sync_wpk() {
+  local repo="iugamlabs/wpk"
+  local tag version dir asset checksum actual
+  if ! tag="$(gh release view -R "$repo" --json tagName -q .tagName)"; then
+    echo "wpk: could not resolve latest GitHub Release; skip" >&2
+    return 0
+  fi
+  version="${tag#v}"
+  dir="$TMP/wpk"
+  mkdir -p "$dir"
+  asset="wpk-$version-win-x64-aot.zip"
+  if ! gh release download "$tag" -R "$repo" -D "$dir" -p SHA256SUMS.txt -p "$asset" ||
+      [[ ! -f "$dir/$asset" || ! -f "$dir/SHA256SUMS.txt" ]]; then
+    echo "wpk: release $tag missing AOT ZIP or SHA256SUMS.txt; skip" >&2
+    return 0
+  fi
+  checksum="$(hash_for "$asset" "$dir/SHA256SUMS.txt")"
+  actual="$(sha256sum "$dir/$asset" | awk '{print $1}')"
+  if [[ "${checksum,,}" != "$actual" ]]; then
+    echo "wpk: release $tag AOT checksum missing or mismatched; skip" >&2
+    return 0
+  fi
+
+  python3 - "$BUCKET/wpk.json" "$version" "$actual" <<'PY'
+import json, sys
+
+path, version, checksum = sys.argv[1:]
+repo = "https://github.com/iugamlabs/wpk"
+releases = f"{repo}/releases/download"
+data = {
+    "version": version,
+    "description": "Windows CLI to find, locate, and upgrade installed apps",
+    "homepage": repo,
+    "architecture": {
+        "64bit": {
+            "url": f"{releases}/v{version}/wpk-{version}-win-x64-aot.zip",
+            "hash": checksum,
+        },
+    },
+    "bin": "wpk.exe",
+    "checkver": {"github": repo},
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": f"{releases}/v$version/wpk-$version-win-x64-aot.zip",
+            },
+        },
+        "hash": {"url": f"{releases}/v$version/SHA256SUMS.txt"},
+    },
+}
+with open(path, "w", encoding="utf-8") as fh:
+    json.dump(data, fh, indent=4)
+    fh.write("\n")
+print(f"wpk -> v{version}")
+PY
+}
+
 main() {
   mkdir -p "$BUCKET"
   sync_ship
   sync_code_porter
   sync_aiquokka
   sync_starblog_publisher
+  sync_wpk
   echo "sync complete"
 }
 
