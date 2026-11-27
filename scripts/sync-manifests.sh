@@ -147,7 +147,7 @@ PY
 }
 
 sync_aiquokka() {
-  local repo="star-plan/aiquokka"
+  local repo="iugamlabs/aiquokka"
   local tag version dir sums h64 h_arm asset64 asset_arm
 
   # Latest release only (skip tags without a Release).
@@ -204,33 +204,33 @@ path, version, h64, h_arm = sys.argv[1:5]
 data = {
     "version": version,
     "description": "Unified subscription quota monitor for Claude, Codex, Cursor, Grok, and more",
-    "homepage": "https://github.com/star-plan/aiquokka",
+    "homepage": "https://github.com/iugamlabs/aiquokka",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": f"https://github.com/star-plan/aiquokka/releases/download/v{version}/aiquokka-windows-amd64.exe#/aiquokka.exe",
+            "url": f"https://github.com/iugamlabs/aiquokka/releases/download/v{version}/aiquokka-windows-amd64.exe#/aiquokka.exe",
             "hash": h64,
         },
         "arm64": {
-            "url": f"https://github.com/star-plan/aiquokka/releases/download/v{version}/aiquokka-windows-arm64.exe#/aiquokka.exe",
+            "url": f"https://github.com/iugamlabs/aiquokka/releases/download/v{version}/aiquokka-windows-arm64.exe#/aiquokka.exe",
             "hash": h_arm,
         },
     },
     "bin": "aiquokka.exe",
     "checkver": {
-        "github": "https://github.com/star-plan/aiquokka"
+        "github": "https://github.com/iugamlabs/aiquokka"
     },
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/star-plan/aiquokka/releases/download/v$version/aiquokka-windows-amd64.exe#/aiquokka.exe"
+                "url": "https://github.com/iugamlabs/aiquokka/releases/download/v$version/aiquokka-windows-amd64.exe#/aiquokka.exe"
             },
             "arm64": {
-                "url": "https://github.com/star-plan/aiquokka/releases/download/v$version/aiquokka-windows-arm64.exe#/aiquokka.exe"
+                "url": "https://github.com/iugamlabs/aiquokka/releases/download/v$version/aiquokka-windows-arm64.exe#/aiquokka.exe"
             },
         },
         "hash": {
-            "url": "https://github.com/star-plan/aiquokka/releases/download/v$version/SHA256SUMS"
+            "url": "https://github.com/iugamlabs/aiquokka/releases/download/v$version/SHA256SUMS"
         },
     },
 }

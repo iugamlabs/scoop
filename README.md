@@ -6,6 +6,7 @@ Scoop bucket for iugamlabs and related tools.
 
 ```powershell
 scoop bucket add iugamlabs https://github.com/iugamlabs/scoop
+scoop install aiquokka
 scoop install ship
 scoop install code-porter
 scoop install starblog-publisher
@@ -24,6 +25,7 @@ scoop update wpk
 
 | App | Source | Notes |
 |-----|--------|--------|
+| [aiquokka](bucket/aiquokka.json) | [iugamlabs/aiquokka](https://github.com/iugamlabs/aiquokka) | AI coding-assistant quota monitor |
 | [ship](bucket/ship.json) | [heyoungai/ship](https://github.com/heyoungai/ship) | Docker / binary release CLI |
 | [code-porter](bucket/code-porter.json) | [star-plan/code-porter](https://github.com/star-plan/code-porter) | Local code archive import/export; requires Git |
 | [wpk](bucket/wpk.json) | [iugamlabs/wpk](https://github.com/iugamlabs/wpk) | Windows package inventory CLI; x64 Native AOT |
